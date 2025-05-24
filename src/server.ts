@@ -20,7 +20,11 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://umuhanda.netlify.app"], // ✅ Allow frontend origin
+    origin: [
+      "http://localhost:5173",
+      "https://umuhanda.netlify.app",
+      "https://umuhanda-fn.netlify.app",
+    ], // ✅ Allow frontend origin
     credentials: true, // ✅ Allow cookies and authorization headers
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders: ["Content-Type", "Authorization", "X-API-Version"], // ✅ Allow these headers
@@ -45,7 +49,11 @@ server.listen(PORT, () => console.log(`✅ Server is running on port ${PORT}`));
 
 export const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:5173", "https://umuhanda.netlify.app"],
+    origin: [
+      "http://localhost:5173",
+      "https://umuhanda.netlify.app",
+      "https://umuhanda-fn.netlify.app",
+    ],
     methods: ["GET", "POST"],
     credentials: true,
   },
