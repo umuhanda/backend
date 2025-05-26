@@ -17,7 +17,9 @@ export const createExamAttempt = async (req: AuthRequest, res: Response) => {
       res.status(401).json({ error: "Unauthorized. Please Login To Continue" });
       return;
     }
-    const userExists = await User.findById(user_id);
+    const userExists = await User.findById(user_id).populate(
+      "active_subscription"
+    );
     if (!userExists) {
       res.status(404).json({ error: "User not found" });
       return;
