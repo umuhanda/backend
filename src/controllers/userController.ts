@@ -62,7 +62,26 @@ export const registerUser = async (req: Request, res: Response) => {
       emailService.sendEmail({
         to: user.email,
         subject: "Kwiyandikisha",
-        html: `Muraho ${user.names} murakoze kwiyandikisha k'urubuga Umuhanda. Ubu <a href="${process.env.FRONTEND_URL}/signin" style="color: #1a73e8; text-decoration: none;">mwakinjira</a> muri konti yanyu mugatangira kwiga !`,
+        html: `
+        <div style="font-family: Arial, sans-serif; background-color: #f9fafb; padding: 24px; border-radius: 10px; border: 1px solid #e5e7eb; max-width: 520px; margin: auto;">
+          <h2 style="color: #111827; margin-bottom: 12px;">Muraho, ${user.names} 👋</h2>
+          <p style="color: #374151; font-size: 15px; line-height: 1.6;">
+            Murakoze cyane kwiyandikisha k'urubuga <strong>Umuhanda</strong>. Ubu mwemerewe kwinjira muri konti yanyu no gutangira urugendo rwo kwiga.
+          </p>
+          <div style="text-align: center; margin: 24px 0;">
+            <a href="${process.env.FRONTEND_URL}/signin"
+               style="display: inline-block; background-color: #1a73e8; color: #fff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 500;">
+              Injira muri Konti
+            </a>
+          </div>
+          <p style="color: #6b7280; font-size: 13px;">
+            Niba utari wowe wasabye kwiyandikisha, ushobora gusuzugura ubu butumwa.
+          </p>
+          <p style="margin-top: 30px; color: #9ca3af; font-size: 12px;">
+            – Ikipe ya Umuhanda
+          </p>
+        </div>
+      `,
       });
     }
     res
