@@ -354,7 +354,9 @@ export const requestPasswordReset = async (req: Request, res: Response) => {
     });
 
     if (!user) {
-      res.status(404).json({ error: "User not found!" });
+      res
+        .status(404)
+        .json({ error: "User with that email/phone number doesn't exist!" });
       return;
     }
 
@@ -375,7 +377,25 @@ export const requestPasswordReset = async (req: Request, res: Response) => {
       await emailService.sendEmail({
         to: user.email,
         subject: "Password Reset Code",
-        html: `<p>Your Password reset password code is: <strong>${resetCode}</strong>. Be aware that it will expire in 10 minutes</p>`,
+        html: `
+      <div style="font-family: Arial, sans-serif; background-color: #f9fafb; padding: 20px; border-radius: 10px; border: 1px solid #e5e7eb; max-width: 500px; margin: auto;">
+        <h2 style="color: #111827;">🔐 Password Reset Request</h2>
+        <p style="color: #374151; font-size: 14px;">
+          We received a request to reset your password. Use the code below to proceed:
+        </p>
+        <div style="text-align: center; margin: 20px 0;">
+          <span style="font-size: 24px; font-weight: bold; color: #1f2937; background: #e0f2fe; padding: 12px 24px; border-radius: 8px; display: inline-block;">
+            ${resetCode}
+          </span>
+        </div>
+        <p style="color: #6b7280; font-size: 13px;">
+          This code will expire in <strong>10 minutes</strong>. If you did not request a password reset, please ignore this message.
+        </p>
+        <p style="margin-top: 30px; color: #9ca3af; font-size: 12px;">
+          – Umuhanda Security Team
+        </p>
+      </div>
+    `,
       });
     }
 
