@@ -50,7 +50,7 @@ export const createExamAttempt = async (req: AuthRequest, res: Response) => {
           </p>
       
           <div style="text-align: center; margin: 24px 0;">
-            <a href="${process.env.FRONTEND_URL}/signin"
+            <a href="${process.env.FRONTEND_URL}/client"
                style="display: inline-block; background-color: #10b981; color: #fff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 500;">
               Komeza Kwitoza
             </a>
