@@ -5,6 +5,7 @@ import { AuthRequest } from "../middleware/authMiddleware";
 import smsService from "../services/sms.service";
 import User from "../models/User";
 import emailService from "../services/email.service";
+import UserSubscription from "../models/UserSubscription";
 
 // ✅ Create a new exam attempt
 export const createExamAttempt = async (req: AuthRequest, res: Response) => {
@@ -30,6 +31,26 @@ export const createExamAttempt = async (req: AuthRequest, res: Response) => {
       userExists.hasFreeTrial = false;
       await userExists.save();
     }
+
+    const activeSub = userExists.active_subscription;
+
+    if (
+      activeSub &&
+      activeSub.attempts_left !== undefined &&
+      activeSub.attempts_left !== null
+    ) {
+      if (activeSub.attempts_left > 0) {
+        activeSub.attempts_left -= 1;
+        await UserSubscription.findByIdAndUpdate(activeSub._id, {
+          $set: { attempts_left: activeSub.attempts_left },
+        });
+      } else {
+        return res.status(403).json({
+          error: "No exam attempts left. Please upgrade your subscription.",
+        });
+      }
+    }
+
     await attempt.save();
     smsService.sendSMS(
       userExists.phone_number,
