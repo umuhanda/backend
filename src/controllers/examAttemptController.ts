@@ -45,9 +45,10 @@ export const createExamAttempt = async (req: AuthRequest, res: Response) => {
           $set: { attempts_left: activeSub.attempts_left },
         });
       } else {
-        return res.status(403).json({
+        res.status(403).json({
           error: "No exam attempts left. Please upgrade your subscription.",
         });
+        return;
       }
     }
 
