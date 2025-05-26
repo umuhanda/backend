@@ -39,7 +39,31 @@ export const createExamAttempt = async (req: AuthRequest, res: Response) => {
       emailService.sendEmail({
         to: userExists.email,
         subject: "Amanota y'ikizamini",
-        html: `Muraho ${userExists.names}, wabonye amanota ${score}/20 mu isuzuma wakoze. Komeza ukore kenshi witegura ikizamini cya nyuma !`,
+        html: `
+        <div style="font-family: Arial, sans-serif; background-color: #f9fafb; padding: 24px; border-radius: 10px; border: 1px solid #e5e7eb; max-width: 520px; margin: auto;">
+          <h2 style="color: #111827; margin-bottom: 12px;">Muraho, ${userExists.names} 👋</h2>
+          <p style="color: #374151; font-size: 15px; line-height: 1.6;">
+            Twishimiye kukumenyesha ko watsinze isuzuma ryawe ukabona <strong>${score}/20</strong>.
+          </p>
+          <p style="color: #374151; font-size: 15px; line-height: 1.6; margin-top: 16px;">
+            Komeza witoze kenshi kugira ngo witegure neza ikizamini cya nyuma! Uko witoza ni ko wiyongerera amahirwe yo gutsinda.
+          </p>
+      
+          <div style="text-align: center; margin: 24px 0;">
+            <a href="${process.env.FRONTEND_URL}/signin"
+               style="display: inline-block; background-color: #10b981; color: #fff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 500;">
+              Komeza Kwitoza
+            </a>
+          </div>
+      
+          <p style="margin-top: 20px; color: #6b7280; font-size: 13px;">
+            Urugendo rwo gutsinda rwatangiye – komeza utsinde!
+          </p>
+          <p style="margin-top: 24px; color: #9ca3af; font-size: 12px;">
+            – Ikipe ya Umuhanda
+          </p>
+        </div>
+      `,
       });
     }
     res

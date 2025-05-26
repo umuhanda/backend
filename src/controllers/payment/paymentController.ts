@@ -157,7 +157,22 @@ export const handlePaymentCallback = async (
           emailService.sendEmail({
             to: email,
             subject: "Kugura Ifatabuguzi",
-            html: `Muraho neza ${customer.fullName} kwishyura amafaranga ${messagebody} ku rubuga umuhanda byagenze neza. Ubu mushobora <br/><a href="${process.env.FRONTEND_URL}/signin">kwinjira </a><br/> kurubuga mu kiga cyangwa mugakora isuzuma ! !`,
+            html: `
+            <div style="font-family: Arial, sans-serif; background-color: #f9fafb; padding: 24px; border-radius: 10px; border: 1px solid #e5e7eb; max-width: 540px; margin: auto;">
+              <h2 style="color: #111827;">Muraho neza ${customer.fullName}, 👋</h2>
+              <p style="font-size: 15px; color: #374151; line-height: 1.6;">
+                Kwishyura amafaranga <strong>${messagebody}</strong> ku rubuga <strong>Umuhanda</strong> byagenze neza.
+              </p>
+              <p style="font-size: 15px; color: #374151;">
+                Ubu mushobora 
+                <a href="${process.env.FRONTEND_URL}/signin" style="color: #1a73e8; text-decoration: none;">
+                  kwinjira kurubuga
+                </a>
+                mukiga cyangwa mugakora isuzuma!
+              </p>
+              <p style="font-size: 13px; color: #9ca3af; margin-top: 24px;">– Iki ni ubutumwa bwa sisitemu ya Umuhanda</p>
+            </div>
+          `,
           });
         }
         res.status(200).json(savedSubscription);
@@ -180,7 +195,18 @@ export const handlePaymentCallback = async (
             emailService.sendEmail({
               to: email,
               subject: "Kugura Ifatabuguzi",
-              html: `Muraho neza ${customer.fullName} kwishyura amafaranga ${messagebody} ku rubuga umuhanda byagenze neza. Ubu mushobora kwinjira kurubuga mukamanura i gazeti yanyu!`,
+              html: `
+              <div style="font-family: Arial, sans-serif; background-color: #f9fafb; padding: 24px; border-radius: 10px; border: 1px solid #e5e7eb; max-width: 540px; margin: auto;">
+                <h2 style="color: #111827;">Muraho neza ${customer.fullName}, 📄</h2>
+                <p style="font-size: 15px; color: #374151; line-height: 1.6;">
+                  Kwishyura amafaranga <strong>${messagebody}</strong> ku rubuga <strong>Umuhanda</strong> byagenze neza.
+                </p>
+                <p style="font-size: 15px; color: #374151;">
+                  Ubu mushobora kwinjira kurubuga mukamanura i gazeti yanyu!
+                </p>
+                <p style="font-size: 13px; color: #9ca3af; margin-top: 24px;">– Iki ni ubutumwa bwa sisitemu ya Umuhanda</p>
+              </div>
+            `,
             });
           }
         }
@@ -198,7 +224,22 @@ export const handlePaymentCallback = async (
         emailService.sendEmail({
           to: email,
           subject: "Kugura Ifatabuguzi",
-          html: `Muraho neza ${customer.fullName}, Kugura ifatabuguzi ntibibashije gukunda. <br/>Mushobora kugerageza kongera kuri iri huzwa: <a href="${paymentLinkUrl}">${paymentLinkUrl}</a><br/>Cyangwa mutwandikire tubafashe.`,
+          html: `
+          <div style="font-family: Arial, sans-serif; background-color: #fff4f4; padding: 24px; border-radius: 10px; border: 1px solid #fecaca; max-width: 540px; margin: auto;">
+            <h2 style="color: #b91c1c;">Muraho neza ${customer.fullName}, ❌</h2>
+            <p style="font-size: 15px; color: #991b1b; line-height: 1.6;">
+              Kugura ifatabuguzi ntibibashije gukunda.
+            </p>
+            <p style="font-size: 15px; color: #374151;">
+              Mushobora kugerageza kongera kuri iri huzwa: <br/>
+              <a href="${paymentLinkUrl}" style="color: #1d4ed8; word-break: break-word;">${paymentLinkUrl}</a>
+            </p>
+            <p style="font-size: 15px; color: #374151;">
+              Cyangwa mutwandikire tubafashe.
+            </p>
+            <p style="font-size: 13px; color: #9ca3af; margin-top: 24px;">– Iki ni ubutumwa bwa sisitemu ya Umuhanda</p>
+          </div>
+        `,
         });
       }
       console.log(`❌ Payment failed for Transaction ${transactionId}`);
