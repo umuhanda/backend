@@ -24,6 +24,7 @@ app.use(
       "http://localhost:5173",
       "https://umuhanda.netlify.app",
       "https://umuhanda-fn.netlify.app",
+      "https://umuhanda.org"
     ], // ✅ Allow frontend origin
     credentials: true, // ✅ Allow cookies and authorization headers
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
@@ -53,6 +54,7 @@ export const io = new Server(server, {
       "http://localhost:5173",
       "https://umuhanda.netlify.app",
       "https://umuhanda-fn.netlify.app",
+      "https://umuhanda.org"
     ],
     methods: ["GET", "POST"],
     credentials: true,
