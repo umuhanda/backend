@@ -33,7 +33,7 @@ export const registerUser = async (req: Request, res: Response) => {
     if (existingEmail) {
       res
         .status(400)
-        .json({ error: "Email is already in use. Please try another." });
+        .json({ error: "Phone number or email is already in use. Please try another." });
       return;
     }
     const existingPhone = await User.findOne({ phone_number });
