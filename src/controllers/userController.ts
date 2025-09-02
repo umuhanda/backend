@@ -29,7 +29,7 @@ interface TokenPayload {
 export const registerUser = async (req: Request, res: Response) => {
   const { names, email, phone_number, country, city, password } = req.body;
   try {
-    const existingEmail = await User.findOne({ email });
+    const existingEmail = await User.findOne({ phone_number });
     if (existingEmail) {
       res
         .status(400)
